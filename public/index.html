@@ -5162,10 +5162,14 @@ function formatNumber(value, places = 4) { return parseFloat(value.toFixed(place
         Object.keys(data.semesters).sort((a,b) => data.semesters[a].sortKey.localeCompare(data.semesters[b].sortKey)).forEach(semesterName => {
           const semester = data.semesters[semesterName];
           
-          const isForecastSemester = semester.isForecast === true;
-          if ((!semester.courses || semester.courses.length === 0) && !isForecastSemester) {
-              return;
-          }
+          // const isForecastSemester = semester.isForecast === true; // <-- THIS LINE IS NO LONGER NEEDED
+          
+          // ---- BUG FIX ----
+          // THE 'IF' BLOCK THAT HID EMPTY SEMESTERS HAS BEEN REMOVED.
+          // if ((!semester.courses || semester.courses.length === 0) && !isForecastSemester) {
+          //     return;
+          // }
+          // ---- END BUG FIX ----
           
           const semesterCard = document.createElement('div');
           
@@ -7025,6 +7029,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
